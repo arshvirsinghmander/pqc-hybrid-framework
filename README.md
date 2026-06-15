@@ -74,6 +74,20 @@ To save the generated pqc_performance_metrics.png analysis plot back to your loc
 docker run --rm -v "$(pwd)":/var/export -w /var/export pqc-framework:latest -m src.utils.benchmark
 ```
 
+## 🌐 Live Interactive Execution (Network Tunnel)
+
+The framework includes an asynchronous, dual-signature-verified client-server networking model. The handshake exchanges ephemeral composite keys, enforces strict identity authentication via `ML-DSA-65` and `Ed25519`, and establishes an authenticated `AES-256-GCM` symmetric session tunnel.
+
+### 1. Initialize the Server Daemon
+Spin up the background listener on your interface:
+```bash
+python3 -m src.server
+
+### 2. Execute the Client Handshake
+In a separate terminal interface, trigger the network initiation request:
+```
+python3 -m src.client
+
 📜 License
 This framework is open-source software licensed under the MIT License.
    
