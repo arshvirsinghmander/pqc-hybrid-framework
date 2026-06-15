@@ -80,14 +80,14 @@ The framework includes an asynchronous, dual-signature-verified client-server ne
 
 ### 1. Initialize the Server Daemon
 Spin up the background listener on your interface:
-```bash
+```
 python3 -m src.server
-
+```
 ### 2. Execute the Client Handshake
 In a separate terminal interface, trigger the network initiation request:
 ```
 python3 -m src.client
-
+```
 📜 License
 This framework is open-source software licensed under the MIT License.
    
