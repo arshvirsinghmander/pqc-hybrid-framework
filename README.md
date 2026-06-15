@@ -5,7 +5,7 @@ A high-performance, containerized hybrid cryptographic library and file-security
 
 ---
 
-## 🏗️ Core Architecture
+##  Core Architecture
 
 To guarantee long-term confidentiality, this framework implements a strict hybrid cryptographic pipeline. Payloads are protected by a combined key derivation design, ensuring that data remains secure even if one of the underlying algorithms is broken in the future.
 
@@ -19,7 +19,7 @@ $$\text{Shared Secret} = \text{KDF}(\text{Secret}_{\text{X25519}} \parallel \tex
 
 ---
 
-## ⚡ Performance Profiling (Apple Silicon Baseline)
+##  Performance Profiling (Apple Silicon Baseline)
 
 The cryptographic abstraction layer is optimized to minimize computational overhead. Benchmarked over 100 continuous iterations inside an isolated Linux container on macOS (Apple M-series hypervisor architecture), the mean execution latencies are:
 
@@ -31,7 +31,7 @@ The cryptographic abstraction layer is optimized to minimize computational overh
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 * Python 3.11+
@@ -56,7 +56,7 @@ The cryptographic abstraction layer is optimized to minimize computational overh
 python3 -m unittest tests/test_crypto.py
 ```
 
-🐳 Containerized Deployment
+ Containerized Deployment
 The application utilizes a multi-stage Docker build to automate the compilation of liboqs shared objects cleanly without polluting your local workstation environment.
 
 1. Build the Production Image
