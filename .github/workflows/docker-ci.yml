@@ -1,0 +1,30 @@
+name: Hybrid PQC Framework CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Framework Docker Image
+      run: |
+        docker build -t pqc-framework:latest .
+
+    - name: Run Cryptographic Benchmarks Inside Container
+      run: |
+        docker run --rm pqc-framework:latest
+
+    - name: Execute Full Integration Test Matrix Inside Container
+      run: |
+        docker run --rm --entrypoint python3 pqc-framework:latest -m unittest discover -s tests
