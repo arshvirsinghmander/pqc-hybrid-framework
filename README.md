@@ -1,5 +1,5 @@
 # PQC Hybrid Framework
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 A high-performance, containerized hybrid cryptographic library and file-security utility. This project implements a dual-layered defense-in-depth architecture, combining classical cryptographic primitives with NIST-standardized Post-Quantum Cryptography (PQC) to defend against both classical and future quantum adversarial vectors.
 
 ---
