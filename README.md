@@ -5,7 +5,7 @@ A high-performance, containerized hybrid cryptographic library and file-security
 
 ---
 
-##  Core Architecture
+## Core Architecture
 
 To guarantee long-term confidentiality, this framework implements a strict hybrid cryptographic pipeline. Payloads are protected by a combined key derivation design, ensuring that data remains secure even if one of the underlying algorithms is broken in the future.
 
@@ -19,7 +19,7 @@ $$\text{Shared Secret} = \text{KDF}(\text{Secret}_{\text{X25519}} \parallel \tex
 
 ---
 
-##  Performance Profiling (Apple Silicon Baseline)
+## Performance Profiling (Apple Silicon Baseline)
 
 The cryptographic abstraction layer is optimized to minimize computational overhead. Benchmarked over 100 continuous iterations inside an isolated Linux container on macOS (Apple M-series hypervisor architecture), the mean execution latencies are:
 
@@ -31,63 +31,60 @@ The cryptographic abstraction layer is optimized to minimize computational overh
 
 ---
 
-##  Getting Started
+## Getting Started
 
 ### Prerequisites
 * Python 3.11+
 * Docker Desktop (with Buildx active for cross-compilation toolchains)
 * Native C toolchain dependencies (`cmake`, `build-essential`, `libssl-dev`)
 
-### Local Native Installation
+### Installation & Deployment
 
-1. **Clone the workspace and initialize your environment:**
-   ```
-   git clone [https://github.com/arshvirsinghmander/pqc-hybrid-framework.git](https://github.com/arshvirsinghmander/pqc-hybrid-framework.git)
-   cd pqc-hybrid-framework
-   python3 -m venv venv
-   source venv/bin/activate
-   ```
-2. Install requirements and build core C dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-4. Verify logical integrity via the unit test suite:
+# 1. Clone the workspace and initialize your environment
+```
+git clone [https://github.com/arshvirsinghmander/pqc-hybrid-framework.git](https://github.com/arshvirsinghmander/pqc-hybrid-framework.git)
+cd pqc-hybrid-framework
+python3 -m venv venv
+source venv/bin/activate
+```
+# 2. Install requirements and build core C dependencies
+```
+pip install -r requirements.txt
+```
+# 3. Verify logical integrity via the unit test suite
 ```
 python3 -m unittest tests/test_crypto.py
 ```
-
- Containerized Deployment
-The application utilizes a multi-stage Docker build to automate the compilation of liboqs shared objects cleanly without polluting your local workstation environment.
-
-1. Build the Production Image
+# 4. Build the Production Image
 ```
 docker build -t pqc-framework:latest .
 ```
-2. Run Isolated Benchmark Profiling
-Execute the performance metric pipeline inside the container sandbox:
+# 5. Run Isolated Benchmark Profiling
 ```
 docker run --rm pqc-framework:latest
 ```
-3. Export Performance Visualization Models
-To save the generated pqc_performance_metrics.png analysis plot back to your local host folder without masking the container's internal filesystem dependencies, execute:
+# 6. Export Performance Visualization Models
 ```
 docker run --rm -v "$(pwd)":/var/export -w /var/export pqc-framework:latest -m src.utils.benchmark
 ```
 
-## 🌐 Live Interactive Execution (Network Tunnel)
+Live Interactive Execution (Network Tunnel)
 
-The framework includes an asynchronous, dual-signature-verified client-server networking model. The handshake exchanges ephemeral composite keys, enforces strict identity authentication via `ML-DSA-65` and `Ed25519`, and establishes an authenticated `AES-256-GCM` symmetric session tunnel.
+The framework includes an asynchronous, dual-signature-verified client-server networking model. The handshake exchanges ephemeral composite keys, enforces strict identity authentication via ML-DSA-65 and Ed25519, and establishes an authenticated AES-256-GCM symmetric session tunnel.
+Security Testing & Red Teaming
+Run Interceptor: python3 -m tests.mitm_attack_simulation (starts a rogue proxy on port 8081).
+Simulate Attack: Point the client to 8081. The signature engine will detect byte-level mutations in the handshake and terminate the connection immediately.
 
-### 1. Initialize the Server Daemon
-Spin up the background listener on your interface:
+Operational Commands
+
+# Initialize the Server Daemon
 ```
 python3 -m src.server
 ```
-### 2. Execute the Client Handshake
-In a separate terminal interface, trigger the network initiation request:
+# Execute the Client Handshake
 ```
-python3 -m src.client
+python3 -m src.client path/to/your/file.txt
 ```
+
 📜 License
 This framework is open-source software licensed under the MIT License.
-   
