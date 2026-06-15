@@ -216,3 +216,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Project-specific exclusions
+liboqs-python/
+pqc_performance_metrics.png
+.DS_Store
+
+
